@@ -133,17 +133,17 @@ function AdminDashboard() {
   return (
     <div className="min-h-screen bg-gray-50">
       <div className="bg-white shadow">
-        <div className="max-w-7xl mx-auto px-6 py-4">
-          <div className="flex justify-between items-center">
-            <h1 className="text-2xl font-bold text-gray-900">Admin Dashboard</h1>
-            <Link to="/" className="text-orange-600 hover:text-orange-700">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4">
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+            <h1 className="text-xl sm:text-2xl font-bold text-gray-900">Admin Dashboard</h1>
+            <Link to="/" className="text-orange-600 hover:text-orange-700 text-sm sm:text-base">
               View Public Site
             </Link>
           </div>
-          <div className="flex gap-4 mt-4">
+          <div className="flex gap-2 sm:gap-4 mt-4 overflow-x-auto">
             <button
               onClick={() => setActiveTab('positions')}
-              className={`px-4 py-2 font-medium rounded-md ${
+              className={`px-3 sm:px-4 py-2 font-medium rounded-md text-sm sm:text-base whitespace-nowrap ${
                 activeTab === 'positions'
                   ? 'bg-orange-600 text-white'
                   : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
@@ -153,7 +153,7 @@ function AdminDashboard() {
             </button>
             <button
               onClick={() => setActiveTab('applications')}
-              className={`px-4 py-2 font-medium rounded-md ${
+              className={`px-3 sm:px-4 py-2 font-medium rounded-md text-sm sm:text-base whitespace-nowrap ${
                 activeTab === 'applications'
                   ? 'bg-orange-600 text-white'
                   : 'bg-gray-200 text-gray-700 hover:bg-gray-300'

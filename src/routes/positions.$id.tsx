@@ -117,15 +117,15 @@ function PositionDetailPage() {
 
   return (
     <div className="min-h-screen bg-white">
-      <div className="max-w-7xl mx-auto px-6 py-8">
-        <Link to="/" className="text-gray-600 hover:text-gray-900 mb-8 inline-flex items-center gap-2 text-sm">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-8">
+        <Link to="/" className="text-gray-600 hover:text-gray-900 mb-6 sm:mb-8 inline-flex items-center gap-2 text-sm">
           <span>←</span> Browse all open positions
         </Link>
 
-        <div className="mt-8 grid grid-cols-[300px_1fr] gap-12">
+        <div className="mt-6 sm:mt-8 grid grid-cols-1 lg:grid-cols-[300px_1fr] gap-6 lg:gap-12">
           {/* Left sidebar */}
-          <div className="space-y-4 bg-gray-50 p-6 rounded-lg h-fit">
-            <h1 className="text-2xl font-bold text-gray-900">{position.title}</h1>
+          <div className="space-y-4 bg-gray-50 p-4 sm:p-6 rounded-lg">
+            <h1 className="text-xl sm:text-2xl font-bold text-gray-900">{position.title}</h1>
             <p className="text-sm text-gray-600">
               {position.workType} · {position.location}
             </p>
@@ -178,7 +178,7 @@ function PositionDetailPage() {
           </div>
 
           {showApplicationForm && (
-            <div ref={formRef} className="mt-8 border border-gray-200 rounded-lg p-8">
+            <div ref={formRef} className="mt-8 border border-gray-200 rounded-lg p-4 sm:p-8">
               <h2 className="text-lg font-bold mb-6 text-gray-900">Application</h2>
 
               {submitSuccess ? (
@@ -188,7 +188,7 @@ function PositionDetailPage() {
                 </div>
               ) : (
                 <form onSubmit={handleSubmitApplication} className="space-y-5">
-                  <div className="grid grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                       <label className="block text-sm font-medium text-gray-900 mb-2">
                         Full name *
