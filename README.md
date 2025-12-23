@@ -2,6 +2,12 @@
 
 A full-stack job posting and application platform built with TanStack Start, TypeScript, and PostgreSQL.
 
+## 🚀 Live Demo
+
+**View the deployed application:** [https://markoub-ma-assignement.vercel.app/](https://markoub-ma-assignement.vercel.app/)
+
+The live version is deployed on Vercel with a Neon PostgreSQL database.
+
 ## Tech Stack
 
 - **Frontend**: React with TanStack Start, TypeScript, Tailwind CSS
