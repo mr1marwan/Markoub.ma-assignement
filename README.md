@@ -17,20 +17,20 @@ A full-stack job posting and application platform built with TanStack Start, Typ
 - PDF resume upload (2MB max)
 - Admin dashboard to manage positions and view applications
 
-## Quick Start
+## Quick Start (with Docker)
 
 ### Prerequisites
 
 - Node.js >= 18.x
 - npm or yarn
-- PostgreSQL database (we recommend [Neon.tech](https://neon.tech) free tier)
+- Docker and Docker Compose
 
 ### Installation
 
 1. **Clone the repository**
    ```bash
-   git clone <repository-url>
-   cd job-platform
+   git clone https://github.com/mr1marwan/Markoub.ma-assignement.git
+   cd Markoub.ma-assignement
    ```
 
 2. **Install dependencies**
@@ -38,12 +38,9 @@ A full-stack job posting and application platform built with TanStack Start, Typ
    npm install
    ```
 
-3. **Configure environment**
-
-   Create a `.env` file (or copy from `.env.example`):
-   ```env
-   DATABASE_URL=your_neon_connection_string_here
-   PORT=3000
+3. **Start the database**
+   ```bash
+   docker compose up -d
    ```
 
 4. **Setup database**
@@ -58,6 +55,19 @@ A full-stack job posting and application platform built with TanStack Start, Typ
    ```
 
 The application will be available at `http://localhost:3000`
+
+### Alternative: Using Neon (No Docker needed)
+
+If you prefer not to use Docker, you can use Neon's free PostgreSQL database:
+
+1. Create a free account at [neon.tech](https://neon.tech)
+2. Copy your connection string
+3. Create a `.env` file and update:
+   ```env
+   DATABASE_URL=your_neon_connection_string_here
+   PORT=3000
+   ```
+4. Run `npm run db:push && npm run db:seed && npm run dev`
 
 ## Available Scripts
 
@@ -89,13 +99,32 @@ src/
 └── components/               # Reusable components
 ```
 
-## Database Setup with Neon
+## Database Setup
 
+### Local Development (Docker)
+
+The default `.env.example` is configured for Docker. Simply:
+
+```bash
+docker compose up -d
+npm run db:push
+npm run db:seed
+```
+
+### Production Deployment (Neon)
+
+The application automatically detects Neon connections and uses the appropriate database driver.
+
+**For Vercel deployment:**
+1. Add environment variable in Vercel dashboard
+2. Set `DATABASE_URL` to your Neon connection string
+3. Deploy - it will automatically use the Neon HTTP driver
+
+**Local testing with Neon:**
 1. Create a free account at [neon.tech](https://neon.tech)
-2. Create a new project
-3. Copy the connection string from the dashboard
-4. Update `DATABASE_URL` in your `.env` file
-5. Run `npm run db:push && npm run db:seed`
+2. Copy the connection string from the dashboard
+3. Update `DATABASE_URL` in your `.env` file
+4. Run `npm run db:push && npm run db:seed`
 
 ## Application Pages
 
