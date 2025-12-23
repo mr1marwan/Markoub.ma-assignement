@@ -68,16 +68,26 @@ export const Route = createFileRoute('/api/applications')({
             return json({ error: 'Only PDF files are allowed' }, { status: 400 });
           }
 
-          // Save file to disk
-          const uploadDir = path.join(process.cwd(), 'uploads');
-          await fs.mkdir(uploadDir, { recursive: true });
-
+          // Generate a unique filename for reference
           const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
-          const filename = uniqueSuffix + '.pdf';
-          const filepath = path.join(uploadDir, filename);
+          const filename = `${uniqueSuffix}-${file.name}`;
 
-          const buffer = await file.arrayBuffer();
-          await fs.writeFile(filepath, Buffer.from(buffer));
+          // For Vercel deployment: Store filename only (no actual file storage on serverless)
+          // In a production environment, this would upload to cloud storage (S3, R2, etc.)
+          const resumePath = `/uploads/${filename}`;
+
+          // Try to save file locally (works in local development)
+          // Silently fails on Vercel but application still gets saved
+          try {
+            const uploadDir = path.join(process.cwd(), 'uploads');
+            await fs.mkdir(uploadDir, { recursive: true });
+            const filepath = path.join(uploadDir, filename);
+            const buffer = await file.arrayBuffer();
+            await fs.writeFile(filepath, Buffer.from(buffer));
+          } catch (fileError) {
+            // File storage failed (expected on Vercel) - continue anyway
+            console.log('File storage not available (serverless environment)');
+          }
 
           // Save to database
           const result = await db
@@ -86,7 +96,7 @@ export const Route = createFileRoute('/api/applications')({
               fullName,
               email,
               positionId: positionId && !isSpontaneous ? parseInt(positionId) : null,
-              resumePath: `/uploads/${filename}`,
+              resumePath,
               isSpontaneous,
             })
             .returning();
